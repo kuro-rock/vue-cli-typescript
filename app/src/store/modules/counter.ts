@@ -16,22 +16,29 @@ export default class Counter extends VuexModule implements ICounter {
   public count = 0
 
   @Mutation
-  private SET_COUNT(count: number): void {
-    this.count = count
+  private SET_INCREMENT(): void {
+    this.count = this.count + 1
   }
 
-  @Action
+  @Mutation
+  private SET_DECREMENT(): void {
+    console.log(this.count)
+    this.count = this.count - 1
+  }
+
+  @Action({ rawError: true })
   public increment(): void {
-    this.SET_COUNT(this.getCount() + 1)
+    console.log(`this.GetExponentiationCount >>> ${this.exponentiationCount}`)
+    this.SET_INCREMENT()
   }
 
-  @Action
+  @Action({ rawError: true })
   public decrement(): void {
-    this.SET_COUNT(this.getCount() - 1)
+    this.SET_DECREMENT()
   }
 
-  public getCount(): number {
-    return this.count
+  get exponentiationCount(): number {
+    return Math.pow(this.count, 2)
   }
 }
 
