@@ -40,6 +40,13 @@ export default class Counter extends VuexModule implements ICounter {
   get exponentiationCount(): number {
     return Math.pow(this.count, 2)
   }
+
+  // getter(getアクセサをつけた関数)で引数を利用する場合は、「関数を返す関数」にする必要がある
+  get exponentiationCount2() {
+    return (num: number): number => {
+      return Math.pow(this.count + num, 2)
+    }
+  }
 }
 
 export const CounterModule = getModule(Counter)
